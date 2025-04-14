@@ -16,3 +16,6 @@ sudo apt install -t bullseye security-misc
 sudo rm /etc/apt/sources.list.d/kicksecure-bullseye.list
 sudo rm /etc/apt/preferences.d/kicksecure-bullseye.pref
 sudo apt update
+
+
+sudo dpkg --remove --force-remove-reinstreq security-misc
