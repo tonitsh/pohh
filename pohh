@@ -1,12 +1,18 @@
-sudo curl --tlsv1.3 --output /usr/share/keyrings/derivative.asc https://www.kicksecure.com/keys/derivative.asc
-echo "deb [signed-by=/usr/share/keyrings/derivative.asc] https://deb.kicksecure.com bookworm main contrib non-free" | sudo tee /etc/apt/sources.list.d/kicksecure.list
+echo "deb [signed-by=/usr/share/keyrings/derivative.asc] https://deb.kicksecure.com bullseye main contrib non-free" | sudo tee /etc/apt/sources.list.d/kicksecure-bullseye.list
+sudo nano /etc/apt/preferences.d/kicksecure-bullseye.pref
+
+  Package: *
+Pin: release n=bullseye
+Pin-Priority: 100
+
+
+
+apt policy kicksecure-base kicksecure-sysctl
+
+sudo apt install -t bullseye kicksecure-base kicksecure-sysctl
+
+sudo apt install -t bullseye security-misc
+
+sudo rm /etc/apt/sources.list.d/kicksecure-bullseye.list
+sudo rm /etc/apt/preferences.d/kicksecure-bullseye.pref
 sudo apt update
-sudo apt install --no-install-recommends kicksecure-base security-misc kicksecure-sysctl
-
-echo "916B8D99C38EAF5E8ADC7A2A8D66066A2EEACCDA:6:" | gpg --import-ownertrust
-
-
-
-
-echo "deb [signed-by=/usr/share/keyrings/derivative.asc] https://deb.kicksecure.com bookworm main contrib non-free" | sudo tee /etc/apt/sources.list.d/kicksecure.list
-apt-cache policy | grep deb.kicksecure.com -A5
