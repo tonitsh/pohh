@@ -4,3 +4,9 @@ sudo apt update
 sudo apt install --no-install-recommends kicksecure-base security-misc kicksecure-sysctl
 
 echo "916B8D99C38EAF5E8ADC7A2A8D66066A2EEACCDA:6:" | gpg --import-ownertrust
+
+
+
+
+echo "deb [signed-by=/usr/share/keyrings/derivative.asc] https://deb.kicksecure.com bookworm main contrib non-free" | sudo tee /etc/apt/sources.list.d/kicksecure.list
+apt-cache policy | grep deb.kicksecure.com -A5
