@@ -1,0 +1,19 @@
+# Become root
+sudo -i
+
+# Add Kicksecure APT repo
+echo "deb [signed-by=/usr/share/keyrings/kicksecure-archive-keyring.gpg] https://deb.kicksecure.com bookworm main contrib non-free" > /etc/apt/sources.list.d/kicksecure.list
+
+# Download and install the signing key
+apt update && apt install curl gnupg -y
+curl --tlsv1.3 --proto '=https' --max-time 15 --output /usr/share/keyrings/kicksecure-archive-keyring.gpg https://deb.kicksecure.com/kicksecure-archive-keyring.gpg
+
+# Install Kicksecure base packages
+apt update
+apt install --no-install-recommends kicksecure-base
+
+# Optional but recommended (security hardening)
+apt install security-misc kicksecure-sysctl
+
+# Reboot to apply everything
+reboot
