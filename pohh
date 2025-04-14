@@ -1,11 +1,6 @@
-sudo curl --tlsv1.3 --proto '=https' --max-time 15 \
-  --output /usr/share/keyrings/kicksecure-archive-keyring.gpg \
-  https://deb.kicksecure.com/kicksecure-archive-keyring.gpg
+sudo curl --tlsv1.3 --output /usr/share/keyrings/derivative.asc https://www.kicksecure.com/keys/derivative.asc
+echo "deb [signed-by=/usr/share/keyrings/derivative.asc] https://deb.kicksecure.com bookworm main contrib non-free" | sudo tee /etc/apt/sources.list.d/kicksecure.list
+sudo apt update
+sudo apt install --no-install-recommends kicksecure-base security-misc kicksecure-sysctl
 
-ls -l /usr/share/keyrings/kicksecure-archive-keyring.gpg
-
-
-echo "deb [signed-by=/usr/share/keyrings/kicksecure-archive-keyring.gpg] https://deb.kicksecure.com bookworm main contrib non-free" | sudo tee /etc/apt/sources.list.d/kicksecure.list
-
-
-gpg --show-keys /usr/share/keyrings/kicksecure-archive-keyring.gpg
+echo "916B8D99C38EAF5E8ADC7A2A8D66066A2EEACCDA:6:" | gpg --import-ownertrust
